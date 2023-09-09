@@ -1,0 +1,5 @@
+﻿@webapi_HostAddress = https://localhost:7295
+
+GET {{webapi_HostAddress}}/api/Travels
+
+###

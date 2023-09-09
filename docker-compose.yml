@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi
+    build:
+      context: .
+      dockerfile: webapi/Dockerfile
+  react:
+    image: ${DOCKER_REGISTRY-}react
+    build:
+        context: .
+        dockerfile: react/Dockerfile
