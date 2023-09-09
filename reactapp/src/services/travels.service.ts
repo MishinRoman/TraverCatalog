@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ITraveForCreate, ITravel } from "../interfaces/app.interfaces"
+import { IMedia, ITraveForCreate, ITravel } from "../interfaces/app.interfaces"
 
 class TravelSerivce {
    private URL = '/api/Travels'
@@ -7,7 +7,7 @@ class TravelSerivce {
         return await axios.get<ITravel[]>(this.URL)
     }
     async GetTravelById(id: string) {
-        return axios.get<ITravel>(this.URL + id)
+        return axios.get<ITravel>(this.URL+"/id?id="+id)
     }
     async AddTravel(model: ITravel) {
         return (await axios.post<ITravel>(this.URL, model).catch(err=>console.log(err)))

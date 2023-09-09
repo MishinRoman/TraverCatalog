@@ -16,7 +16,7 @@ export interface IUser extends BaseModel{
     hashPassword:string
 }
 export interface IMedia extends File {
-  
+    physicalPath:string
     
 
 }
@@ -30,7 +30,7 @@ export interface ITravel extends BaseModel{
     endDate:Date,
     comments?:IComment[],
     users?:IUser[],
-    media?:IMedia[]|File[]|null,
+    media?:IMedia[]|File[],
     price:number,
 
 }

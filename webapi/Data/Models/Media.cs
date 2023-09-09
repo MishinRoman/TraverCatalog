@@ -17,9 +17,7 @@ namespace webapi.Data.Models
         public string Name { get; set; }
         [Column("Path")]
         public string? PhysicalPath { get; set; }
-        public TravelModel Travel { get; set; }
-
-         
+        public Guid TravelId { get; set; }
         public Stream CreateReadStream()
         {
             throw new NotImplementedException();

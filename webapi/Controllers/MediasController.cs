@@ -27,19 +27,19 @@ namespace webapi.Controllers
         public async Task UpdateMedia(Media model) => await _repository.UpdateAsync(model);
         [HttpDelete("id")]
         public async Task DeleteMedia(Guid id) => await _repository.DeleteAsync(id);
-        //[HttpGet]
-        //public async Task<List<Media>> GetUsersOnTravel(Guid TravelId)
-        //{
-        //    var medias = await _repository.GetAllAsync();
-        //    if (medias != null)
-        //    {
+        [HttpGet("travelId")]
+        public async Task<List<Media>> GetUsersOnTravel(Guid TravelId)
+        {
+            var medias = await _repository.GetAllAsync();
+            if (medias != null)
+            {
 
-        //        return medias.Where(m => m.Travel.Id == TravelId).ToList();
-        //    }
+                return medias.Where(m => m.TravelId == TravelId).ToList();
+            }
 
-        //    Results.NotFound(medias);
-        //    return new List<Media>();
-        //}
+            Results.NotFound(medias);
+            return new List<Media>();
+        }
     }
 }
 

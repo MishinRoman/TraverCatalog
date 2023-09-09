@@ -1,15 +1,15 @@
 import axios from "axios"
 import { IMedia, ITravel } from "../interfaces/app.interfaces"
 
-class TravelSerivce {
+class MediaSerivce {
    private URL = '/api/Medias'
-    async GetTravels() {
+    async GetMedias() {
         return await axios.get<IMedia[]>(this.URL)
     }
-    async GetTravelById(id: string) {
+    async GetById(id: string) {
         return axios.get<IMedia>(this.URL + id)
     }
-    async GetTravelByTravelId(travelId: string) {
+    async GetMediaByTravelId(travelId: string) {
         return axios.get<IMedia[]>(this.URL + travelId)
     }
     async AddTravel(model: IMedia) {
@@ -22,4 +22,4 @@ class TravelSerivce {
         return axios.delete(this.URL + id)
     }
 }
-export default new TravelSerivce()
+export default new MediaSerivce()
