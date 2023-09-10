@@ -39,7 +39,7 @@ const InputTravel = (props: Props) => {
     const files: File[] = event.target.files
       ? Array.from(event.target.files)
       : [];
-   setTravel({...props.travel, media: {...files}})
+  // setTravel({...props.travel, media: {...files}})
   };
 
   props.onChange(travel);

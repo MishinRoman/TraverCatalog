@@ -22,6 +22,7 @@ const TravelsList = (props: Props) => {
       //   cacheTime:10,//время х
     }
   );
+ 
   return isError ? (
     <div>{(error as Error).message}</div>
   ) : (

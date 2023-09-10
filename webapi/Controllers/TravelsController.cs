@@ -18,7 +18,17 @@ namespace webapi.Controllers
             _mediaRepository = mediaRepository;
         }
         [HttpGet]
-        public async Task<IEnumerable<TravelModel>> GetTraverls() => await _repository.GetAllAsync();
+        public async Task<IEnumerable<TravelModel>> GetTraverls()
+        {
+            var travels = await _repository.GetAllAsync();
+            var medias = await _mediaRepository.GetAllAsync();
+          
+            foreach (var travel in travels)
+            {   
+                travel.Media = medias.Where(m => m.TravelId == travel.Id).ToList();
+            }
+            return travels;
+        }
         //[HttpGet("id")]
         //public async Task<TravelModel> GetTraverlById(Guid id) => await _repository.GetAsync(id);
         [HttpPost]
