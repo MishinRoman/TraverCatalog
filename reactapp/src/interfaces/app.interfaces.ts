@@ -30,7 +30,7 @@ export interface ITravel extends BaseModel{
     endDate:Date,
     comments?:IComment[],
     users?:IUser[],
-    media?:IMedia[]|File[],
+    media:IMedia[],
     price:number,
 
 }

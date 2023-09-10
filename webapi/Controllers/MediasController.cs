@@ -19,8 +19,8 @@ namespace webapi.Controllers
 
         [HttpGet]
         public async Task<IEnumerable<Media>> GetMedias() => await _repository.GetAllAsync();
-        [HttpGet("id")]
-        public async Task<Media> GetMediaById(Guid id) => await _repository.GetAsync(id);
+        //[HttpGet("id")]
+        //public async Task<Media> GetMediaById(Guid id) => await _repository.GetAsync(id);
         [HttpPost]
         public async Task AddMedia(Media model) => await _repository.AddAsync(model);
         [HttpPatch]

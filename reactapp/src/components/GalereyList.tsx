@@ -1,32 +1,40 @@
-import React, { useState } from 'react'
-import { IMedia } from '../interfaces/app.interfaces'
+import React, { useState } from "react";
+import { IMedia } from "../interfaces/app.interfaces";
 
 type Props = {
-    images:IMedia[]
-}
+  images?: IMedia[];
+};
+const cardWidth = 900;
 
 const GalereyList = (props: Props) => {
-    const [filePath, setFilePath]=useState<string>();
-    const [count, setCount] = useState<number>(0);
-        props.images.map(i=>setFilePath(i.physicalPath+i.name))
-
-    // const listToLeft=()=>{
-    //     if(count<props.images.length)
-    //    setCount(count+1);
-    // }
-    // const listToRigth=()=>{
-        
-    //    setCount(count-1);
-    // }
+  let images = props.images ?? [{ physicalPath: "/", name: "" }];
+  const [count, setCount] = useState(0);
+  const [path, setPath] = useState(images[0].physicalPath + images[0].name);
 
   return (
-   <div>
-    
-    {/* <button onClick={listToLeft}>+</button> */}
-     <img src={filePath} title={filePath}></img>
-     {/* <button onClick={listToRigth}>-</button> */}
-   </div>
-  )
-}
+    <div>
+      <button
+        onClick={() =>
+          count < images.length - 1 ? setCount(count + 1) : setCount(0)
+        }
+      >
+        {">"}
+      </button>
+      <img
+        src={images[count]?.physicalPath + images[count]?.name}
+        title={images[count]?.name}
+        width={cardWidth - 4}
+        height={cardWidth}
+      />
+      <button
+        onClick={() =>
+          count != 0 ? setCount(count - 1) : setCount(images.length - 1)
+        }
+      >
+        {"<"}
+      </button>
+    </div>
+  );
+};
 
-export default GalereyList
+export default GalereyList;

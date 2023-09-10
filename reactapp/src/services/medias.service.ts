@@ -10,7 +10,7 @@ class MediaSerivce {
         return axios.get<IMedia>(this.URL + id)
     }
     async GetMediaByTravelId(travelId: string) {
-        return axios.get<IMedia[]>(this.URL + travelId)
+        return axios.get<IMedia[]>(this.URL +"/travelId?TravelId="+travelId)
     }
     async AddTravel(model: IMedia) {
         return (await axios.post<IMedia>(this.URL, model).catch(err=>console.log(err)))

@@ -34,6 +34,10 @@ export default defineConfig({
             '^/api/Travels': {
                 target: 'https://localhost:7295/',
                 secure: false
+            },
+            '^/api/Medias':{
+                target: 'https://localhost:7295/',
+                secure: false
             }
         },
         port: 5173,
