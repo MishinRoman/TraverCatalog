@@ -1,25 +1,33 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import React from 'react'
+import { ChangeEvent, Fragment, useState } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import {
+  Bars3Icon,
+  BellIcon,
+  LanguageIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
+import React from "react";
+import { useTheme } from "../Hooks/thems-hook";
+import { GiMoon } from "react-icons/gi";
 
 const navigation = [
-  { name: 'Главная', href: '/', current: true },
-  { name: 'Список путишевствий', href: '/travels', current: false },
-  { name: 'Administrator', href: '/admin', current: false },
-  { name: 'Calendar', href: '#', current: false },
-]
-
-/**   <a href="/">Главная</a>
-            <a href="/travels">Список путишевствий</a>
-            <a href="/admin">Administrator</a>
- */
+  { name: "Главная", href: "/", current: true },
+  { name: "Список путишевствий", href: "/travels", current: false },
+  { name: "Administrator", href: "/admin", current: false },
+  { name: "Calendar", href: "#", current: false },
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
+  const { theme, setTheme } = useTheme();
+localStorage.setItem("theme",theme);
+  function changeThemeHandler(event: ChangeEvent<HTMLInputElement>): void {
+    event.target.checked ? setTheme("dark") : setTheme("ligth");
+  }
+
   return (
     <Disclosure as="nav" className="bg-slate-200 dark:bg-gray-800 sticky top-0">
       {({ open }) => (
@@ -53,10 +61,12 @@ export default function Example() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-900 dark:text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-900 dark:text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </a>
@@ -101,7 +111,10 @@ export default function Example() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Your Profile
                           </a>
@@ -111,7 +124,10 @@ export default function Example() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Settings
                           </a>
@@ -121,7 +137,10 @@ export default function Example() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Sign out
                           </a>
@@ -131,6 +150,15 @@ export default function Example() {
                   </Transition>
                 </Menu>
               </div>
+              <label className="ml-7 mr-2">
+                <input
+                  onChange={changeThemeHandler}
+                  type="checkbox"
+                  aria-label="theme"
+                  className={" hidden"}
+                />
+                <GiMoon size={32} />
+              </label>
             </div>
           </div>
 
@@ -142,10 +170,12 @@ export default function Example() {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block rounded-md px-3 py-2 text-base font-medium'
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block rounded-md px-3 py-2 text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -155,5 +185,5 @@ export default function Example() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }
