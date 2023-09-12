@@ -12,6 +12,7 @@ export default {
   },
   plugins: [],
   darkMode: 'class',
+  'tailwindcss/nesting':  'postcss-nesting',
   
 }
 

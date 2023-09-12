@@ -34,4 +34,5 @@ export interface ITravel extends BaseModel{
     price:number,
 
 }
+
 export interface ITraveForCreate extends Omit<ITravel,"id">{};

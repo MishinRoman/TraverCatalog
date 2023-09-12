@@ -31,6 +31,10 @@ export default defineConfig({
     },
     server: {
         proxy: {
+            '^/count': {
+                target: 'https://localhost:7295/',
+                secure: false
+            },
             '^/api/Travels': {
                 target: 'https://localhost:7295/',
                 secure: false

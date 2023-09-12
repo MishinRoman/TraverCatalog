@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import { IMedia, ITravel } from "../interfaces/app.interfaces";
 import { DefaultValue } from "../services/travel.defaultValue";
-import { key } from "localforage";
+
 
 type Props = {
   travel: ITravel;
@@ -29,7 +29,7 @@ const InputTravel = (props: Props) => {
     id: "number",
     descripion: "textaria",
     startDate: "datetime-local",
-    endDate: "date",
+    endDate: "datetime-local",
     media: "file",
     comments: "text",
     price: "finance",
