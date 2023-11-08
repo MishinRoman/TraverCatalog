@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
+using System.ComponentModel.DataAnnotations;
 
 namespace webapi.Data.Models
 {

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 using webapi.Data.Models;
@@ -8,9 +10,9 @@ namespace webapi.Services
 {
     public class EFRepository<T> : IRepository<T> where T : BaseModel
     {
-        private readonly DbContext _context;
+        private readonly IdentityDbContext<User> _context;
 
-        public EFRepository(DbContext context)
+        public EFRepository(IdentityDbContext<User> context)
         {
             _context = context;
         }
