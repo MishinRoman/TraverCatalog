@@ -8,7 +8,7 @@ import TravelsList from "./components/TravelsList.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import NavBar from "./components/NavBar.js";
 import travelsService from "./services/travels.service.js";
-
+import { ThemeProvider } from "@material-tailwind/react";
 
 const queryClient = new QueryClient();
 
@@ -24,16 +24,17 @@ const router = createBrowserRouter([
   {
     path: "/travels",
 
-    element: <TravelsList  />,
+    element: <TravelsList />,
   },
 ]);
 
-
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement, ).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-    <NavBar/>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <NavBar />
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );

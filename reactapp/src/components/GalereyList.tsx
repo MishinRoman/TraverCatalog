@@ -8,7 +8,7 @@ import {
 type Props = {
   images: IMedia[];
 };
-const cardWidth = 900;
+const cardWidth = 200;
 
 const GalereyList = ({ images }: Props) => {
   const [count, setCount] = useState(0);
@@ -23,12 +23,15 @@ const GalereyList = ({ images }: Props) => {
           }
           title="back"
         >
-          <MdOutlineArrowBackIos size={36} className={"text-black dark:text-white "}/>
+          <MdOutlineArrowBackIos
+            size={36}
+            className={"text-black dark:text-white "}
+          />
         </button>
         <img
           src={images[count]?.physicalPath + images[count]?.name}
           title={images[count]?.name}
-          width={cardWidth - 4}
+          width={cardWidth - 15}
           height={cardWidth}
         />
 
@@ -38,10 +41,12 @@ const GalereyList = ({ images }: Props) => {
           }
           title="forward"
         >
-          <MdOutlineArrowForwardIos size={36} className={"text-black dark:text-white "} />
+          <MdOutlineArrowForwardIos
+            size={36}
+            className={"text-black dark:text-white "}
+          />
         </button>
       </div>
-      
     </div>
   );
 };

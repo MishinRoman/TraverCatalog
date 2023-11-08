@@ -6,18 +6,16 @@ import NavBar from "./components/NavBar";
 
 type Props = {};
 
-
-
 const App = (props: Props) => {
-  return (<div>
-   
-    <div className="container">
-    Главная
-      {/* <TravelsList /> */}
-    
-
+  return (
+    <div>
+      <div className="wrapper bg-image p-20 h-screen">
+        <h1 className="travel_slong text-4xl p-6">
+          Путешествуйте по стране с нами
+        </h1>
+        <h2 className="slong">Расширяем горизонты в рамках границ.</h2>
+      </div>
     </div>
-  </div>
   );
 };
 
