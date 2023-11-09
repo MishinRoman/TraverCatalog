@@ -1,5 +1,39 @@
-﻿@webapi_HostAddress = https://localhost:7295
-
+﻿@webapi_HostAddress = http://localhost:5038
+@Token = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImVtYWlsIjoibWlzaGluX3JvbWFuQG1haWwucnUiLCJqdGkiOiI5NmQ3M2M0Yi05NmVmLTQxZDAtYjYwZC02Yzc0ZTVhYzQ4MjAiLCJuYmYiOjE2OTk1NTU3NTQsImV4cCI6MTY5OTU1NjM1NCwiaWF0IjoxNjk5NTU1NzU0fQ.QUYYa0PrGpFylCRLrH4UhZTWt3GNB14zmTE7Pp9IPU3NfiwXcyn7ydiqbMyx0Yeyda0fby6xs42b3LUad5O1sA
 GET {{webapi_HostAddress}}/api/Travels
+
+###
+
+GET {{webapi_HostAddress}}/api/tokenauth/login
+Content-Type: application/json
+
+{
+  "UserName":"admin",
+  "Password":"Password123"
+}
+###
+
+POST {{webapi_HostAddress}}/api/tokenauth/register
+Content-Type: application/json
+
+{
+  
+  "userName":"admin",
+  "phoneNumber":"1234123141",
+  "email":"mishin_roman@mail.ru",
+  "password":"Password123"
+}
+
+###
+
+GET {{webapi_HostAddress}}/api/travels?page=1
+Authorization:Bearer {{Token}}
+
+
+###
+
+GET {{webapi_HostAddress}}/count
+Authorization:Bearer {{Token}}
+
 
 ###

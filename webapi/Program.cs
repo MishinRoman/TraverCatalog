@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 using Swashbuckle.AspNetCore.Filters;
@@ -19,9 +20,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthorization();
 
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<PostgresDbContext>();
 
-
-builder.Services.AddIdentityApiEndpoints<User>().AddEntityFrameworkStores<PostgresDbContext>();
 
 
 builder.Services.AddDbContext<PostgresDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PsqlConnectionString")));
@@ -58,7 +58,19 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 });
 
-builder.Services.AddAuthentication().AddBearerToken();
+builder.Services.AddAuthentication().AddJwtBearer(options =>
+{
+    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]));
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        IssuerSigningKey = key
+    };
+
+});
 
 
 builder.Services.AddCors();
@@ -67,15 +79,31 @@ builder.Services.AddCors();
 builder.Services.AddSwaggerGen(option =>
 {
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "Travel API", Version = "v1" });
-    option.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey,
         Description = "Please enter a valid token",
-      
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+
+
     });
-    option.OperationFilter<SecurityRequirementsOperationFilter>();
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        { new OpenApiSecurityScheme()
+            {
+                Reference= new OpenApiReference
+                {
+                    Type = ReferenceType.Schema,
+                    Id="Bearer"
+                }
+            },new String[]{}
+        }
+    });
+
+
 });
 
 var app = builder.Build();
@@ -87,14 +115,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-app.MapIdentityApi<User>();
+app.UseExceptionHandler("/apierror");
 //app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 
 app.MapControllerRoute(
